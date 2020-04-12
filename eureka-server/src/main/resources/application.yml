@@ -1,0 +1,9 @@
+server:
+  port: 10086
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka # 两个ip不一样，此处是eureka的高可用，如无多台eureka，则ip一样(10086)，自己注册到自己
+spring:
+  application:
+    name: eurekaServer

@@ -1,0 +1,30 @@
+
+spring:
+  application:
+    name: user-service
+  #通用的数据源配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xc_user?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+  jpa:
+    #这个参数是在建表的时候，将默认的存储引擎切换为 InnoDB 用的
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #配置在日志中打印出执行的 SQL 语句信息。
+    show-sql: true
+    hibernate:
+      #配置指明在程序启动的时候要删除并且创建实体类对应的表
+      ddl-auto: create
+eureka:
+  client:
+    service-url:
+      # 将服务注册到注册中心
+      defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka # 高可用
+  instance:
+    # 心跳续约：服务注册完成后，服务提供者需维持一个心跳，定时向注册中心发起一个请求，告诉注册中心自己仍然存活，称之为服务续约，可不设置
+    lease-renewal-interval-in-seconds: 30 #默认30
+    # 过期时间：建立在发送心跳的基础上，如果90s后仍未向注册中心发送心跳（续约），说明服务提供者宕机，注册中心会隔一段时间剔除该服务，不再为消费者提供，可不设置
+    lease-expiration-duration-in-seconds: 90 #默认90
+server:
+  port: 8081
