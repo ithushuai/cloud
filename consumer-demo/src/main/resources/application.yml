@@ -11,10 +11,10 @@ eureka:
     # 拉取周期：服务消费方定期从注册中心拉取服务列表，可不设置
     registry-fetch-interval-seconds: 30 # 默认30
 # feign中集成了ribbon负载均衡器，如果在ReadTimeout之内没有正常请求服务，ribbon会报错读取超时。不过如果开启了hystrix熔断，则在熔断超时之后由熔断控制回调
-user-service:
+user-service: # 指定调用user-service服务时的负载均衡配置，也可不加
   ribbon:
     ConnectTimeout: 250 # 连接超时时间(ms)
-    ReadTimeout: 1000 # 通信超时时间(ms) # 通信超时时间(ms) # feign调用远程服务，如果远程服务阻塞，调用方负载均衡器会在超时时间之后报错读取超时
+    ReadTimeout: 3000 # 通信超时时间(ms) # 通信超时时间(ms) # feign调用远程服务，如果远程服务阻塞，调用方负载均衡器会在超时时间之后报错读取超时
     OkToRetryOnAllOperations: true # 是否对所有操作重试
     MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
     MaxAutoRetries: 1 # 同一实例的重试次数
@@ -27,4 +27,4 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 2000 # 熔断超时时间，默认1000ms,1s内服务未请求到，则熔断
+            timeoutInMilliseconds: 3000 # 熔断超时时间，默认1000ms,1s内服务未请求到，则熔断

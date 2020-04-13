@@ -42,11 +42,11 @@ public class ConsumerController {
      * 调用feign客户端方法
      * @param id
      * @return
-     * @throws JsonProcessingException
      */
     @GetMapping("{id}")
-    public User queryById(@PathVariable("id") Long id) throws JsonProcessingException {
-        return userFeignClient.queryById(id); //fegin客户端调用
+    public User queryById(@PathVariable("id") Long id){
+        User user = userFeignClient.queryById(id);
+        return user; //fegin客户端调用
     }
 
     /**

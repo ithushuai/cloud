@@ -1,0 +1,41 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: gateway
+#zuul:
+#  routes: # 配置路由，所有请求路径以path打头的，都会转发到url地址，请求路径为path后的内容
+#    user-service: # 路由id，可任取
+#      path: /user-service/**
+#      # url: http://127.0.0.1:8082 # zuul独立使用时可以配置，如果需要从eureka中拉取服务，则需配serviceId
+#      serviceId: user-service # 转发的服务在eureka中，配置serviceId，即可从注册中心拉取服务列表，转发，与url类似
+#       strip-prefix: false # 去除前缀，设置false即转发时不去除匹配path前缀
+zuul:
+  prefix: /api # 全局前缀
+  routes: # 配置路由，所有请求路径以path打头的，都会转发到url地址，请求路径为path后的内容
+    consumer-service: /consumer/** # 上面的简化配置，只要请求路径以consumer打头，则转发到eureka中服务id为consumer-service的服务中去。
+    # 不过zuul已经为eureka中的所有服务都提供了默认的表示方式，所有以【服务id】开头的请求，都会转发到【服务id】对应的服务中去，但是这种默认配置存在隐患，它会把所有服务的接口对外暴露，
+    # 而如果我们不希望某些服务对外提供这种访问方式，可以禁止使用
+  ignored-services:
+    - consumer-service
+  host: # 配置超时时间，否则如果短时间内未获取到服务，就会立马提示超时
+    connect-timeout-millis: 3000
+    socket-timeout-millis: 3000
+eureka:
+  client:
+    service-url:
+      # 将服务注册到注册中心
+      defaultZone: http://127.0.0.1:10086/eureka
+ribbon:
+  ConnectTimeout: 250 # 连接超时时间(ms)
+  ReadTimeout: 3000 # 通信超时时间(ms) # 通信超时时间(ms) # feign调用远程服务，如果远程服务阻塞，调用方负载均衡器会在超时时间之后报错读取超时
+  OkToRetryOnAllOperations: true # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000 # 熔断超时时间，默认1000ms,1s内服务未请求到，则熔断
