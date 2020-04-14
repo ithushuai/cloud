@@ -9,7 +9,6 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * created by it_hushuai
  * 2020/4/13 20:39
  */
-@EnableDiscoveryClient
 @EnableZuulProxy //开启zuul
 @SpringBootApplication
 public class GatewayApplication {

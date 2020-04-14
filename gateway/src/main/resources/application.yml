@@ -29,9 +29,6 @@ eureka:
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)
   ReadTimeout: 3000 # 通信超时时间(ms) # 通信超时时间(ms) # feign调用远程服务，如果远程服务阻塞，调用方负载均衡器会在超时时间之后报错读取超时
-  OkToRetryOnAllOperations: true # 是否对所有操作重试
-  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
-  MaxAutoRetries: 1 # 同一实例的重试次数
 hystrix:
   command:
     default:
