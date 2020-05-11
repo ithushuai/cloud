@@ -1,0 +1,21 @@
+server:
+  port: 8084
+spring:
+  rabbitmq:
+    host: 192.168.18.130
+    username: admin
+    password: admin
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

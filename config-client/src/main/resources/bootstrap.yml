@@ -1,0 +1,33 @@
+eureka: # 这里eureka配置必须放在bootstrap.yml中，因为在项目启动时，就需要注册到注册中心，然后去配置中心拉取配置，有先后顺序
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+  application:
+    name: config-client
+  cloud:
+    config:
+#      uri: http://localhost:8084
+      label: master
+      profile: dev
+      discovery: # 当config server注册到eureka时配置
+        enabled: true
+        service-id: config-center # config server 在注册中心的注册名
+---
+spring:
+  profiles: prod
+  application:
+    name: config-client
+  cloud:
+    config:
+#      uri: http://localhost:8084 # 当不使用eureka注册中心时，用uri配置config server的地址，当config server注册大eureka时，无需该配置
+      label: master
+      profile: prod
+      discovery: # 当config server注册到eureka时配置
+        enabled: true # 开启从注册中心查找服务功能
+        service-id: config-center # config server 在注册中心的注册名

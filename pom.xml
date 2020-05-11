@@ -8,6 +8,8 @@
         <module>consumer-demo</module>
         <module>eureka-server</module>
         <module>gateway</module>
+        <module>config-center</module>
+        <module>config-client</module>
     </modules>
 
     <parent>
@@ -87,6 +89,11 @@
             <id>spring-release</id>
             <name>Spring Maven RELEASE Repository</name>
             <url>http://repo.spring.io/libs-release</url>
+        </repository>
+        <repository>
+            <id>activiti-repos2</id>
+            <name>Activiti Repository 2</name>
+            <url>https://app.camunda.com/nexus/content/groups/public</url>
         </repository>
     </repositories>
 

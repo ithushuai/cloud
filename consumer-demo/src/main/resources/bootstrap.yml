@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: consumer-service
+  cloud:
+    config:
+#      uri: http://localhost:8084
+      label: master
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: config-center
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
