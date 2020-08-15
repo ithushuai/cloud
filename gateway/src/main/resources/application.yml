@@ -36,3 +36,12 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000 # 熔断超时时间，默认1000ms,1s内服务未请求到，则熔断
+my:
+  jwt:
+    pubKeyPath: E:\\data\\leyoucode\\rsa\\rsa.pub # 公钥地址
+    cookieName: MY_TOKEN
+  filter:
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register

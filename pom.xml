@@ -10,6 +10,7 @@
         <module>gateway</module>
         <module>config-center</module>
         <module>config-client</module>
+        <module>auth-service</module>
     </modules>
 
     <parent>
